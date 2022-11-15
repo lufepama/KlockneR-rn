@@ -1,11 +1,22 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
+
 
 const CategoryItem = ({item}) => {
 
+  const navigation = useNavigation()
+
   return (
     <View style={styles.root}>
-      <View style={styles.container}>
+      <TouchableOpacity 
+              style={styles.container} 
+              activeOpacity={0.9} 
+              onPress={()=>{
+                navigation.navigate('Detail')
+              }}
+              
+              >
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
@@ -16,7 +27,7 @@ const CategoryItem = ({item}) => {
           <Text style={styles.title}>{item.title.toUpperCase()}</Text>
           <Text style={styles.products}>{item.products} productos</Text>
         </View>
-      </View>
+      </TouchableOpacity>
       
     </View>
   )
