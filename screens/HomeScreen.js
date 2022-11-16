@@ -49,14 +49,13 @@ const HomeScreen = () => {
 
   const {categories} = useKlocknerCategories()
 
-
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header/>
       <View style={styles.container}>
         <ProductCategoryList categoryList={categories}  />
-        <BottomTab/>
       </View>
+      <BottomTab/>
     </SafeAreaView>
   )
 }
@@ -73,6 +72,7 @@ const styles = StyleSheet.create({
   container:{
     display: 'flex',
     justifyContent:'space-between',
+    backgroundColor:'#2F2E2E',
     flex:1
   }
 })

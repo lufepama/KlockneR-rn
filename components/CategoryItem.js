@@ -1,22 +1,29 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute} from '@react-navigation/native';
 
 
-const CategoryItem = ({item, onUpdateHeader}) => {
+
+const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
 
   const navigation = useNavigation()
+  const route = useRoute()
+
+  const handlePress = () => {
+    onUpdateHeader(item)
+    onSelectSubcategory(item)
+    if (route.name != 'Detail') {
+      navigation.navigate('Detail')
+    }
+  }
+
 
   return (
     <View style={styles.root}>
       <TouchableOpacity 
               style={styles.container} 
               activeOpacity={0.9} 
-              onPress={()=>{
-                onUpdateHeader(item)
-                navigation.navigate('Detail')
-              }}
-              
+              onPress={()=>handlePress()}
               >
         <View style={styles.imageContainer}>
           <Image

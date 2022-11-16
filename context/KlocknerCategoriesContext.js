@@ -7,6 +7,7 @@ const Context = React.createContext({})
 export const KlocknerCategoriesProvider = ({ children }) => {
 
     const [categories, setCategories] = useState([])
+    const [selectedSubcategory, setSelectedSubcategory ] = useState({})
     const [isLoaded, setIsLoaded] = useState(false)
     const [headerOptions, setHeaderOptions] = useState([])
 
@@ -19,7 +20,7 @@ export const KlocknerCategoriesProvider = ({ children }) => {
           }
         });
       }
-
+      
     useEffect(()=> {
         fetchData()
     },[])
@@ -28,7 +29,8 @@ export const KlocknerCategoriesProvider = ({ children }) => {
         <Context.Provider value={{
             categories, setCategories,
             isLoaded, setIsLoaded,
-            headerOptions, setHeaderOptions
+            headerOptions, setHeaderOptions,
+            selectedSubcategory, setSelectedSubcategory
          }} >
             {children}
         </Context.Provider>

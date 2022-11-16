@@ -6,7 +6,9 @@ export const useKlocknerCategories = () => {
 
     const { categories, setCategories,
         isLoaded, setIsLoaded,
-        headerOptions, setHeaderOptions} 
+        headerOptions, setHeaderOptions,
+        selectedSubcategory, setSelectedSubcategory
+    } 
         = useContext(KlocknerCategoriesContext)
     
     const addItemHeader = (item) => {
@@ -22,12 +24,23 @@ export const useKlocknerCategories = () => {
         setHeaderOptions(myHeader)
     }
 
+    const onSelectSubcategory = (myItem) => {
+        const currentCategory = categories.filter((item)=> item.title == myItem.title )
+        if (currentCategory[0]) {
+            setSelectedSubcategory(currentCategory[0])
+            setCategories(currentCategory[0].subcategories)
+            return
+        }
+    }
+
     return { 
             categories,
             isLoaded, 
             headerOptions,
+            selectedSubcategory,
             addItemHeader,
-            deleteItemHeader
+            deleteItemHeader,
+            onSelectSubcategory
         }
 
 }

@@ -5,11 +5,12 @@ import { useKlocknerCategories } from '../hooks/useKlocknerCategories'
 
 const ProductCategoryList = ({categoryList}) => {
 
-  const {addItemHeader} = useKlocknerCategories()
+  const {addItemHeader, onSelectSubcategory} = useKlocknerCategories()
 
   const onUpdateHeader = (item) => {
     addItemHeader(item)
   }
+
 
   return (
     <View style={styles.container}>
@@ -18,7 +19,7 @@ const ProductCategoryList = ({categoryList}) => {
             numColumns={1}
             keyExtractor={(item)=>item.title}
             renderItem={({item}) => 
-            <CategoryItem item={item} key={item.title} onUpdateHeader={onUpdateHeader}/>
+            <CategoryItem item={item} key={item.title} onUpdateHeader={onUpdateHeader} onSelectSubcategory={onSelectSubcategory}/>
           }
         />
     </View>
@@ -28,7 +29,6 @@ const ProductCategoryList = ({categoryList}) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    flex:1,
     backgroundColor:'#2F2E2E',
     paddingLeft: 25,
     paddingTop: 30

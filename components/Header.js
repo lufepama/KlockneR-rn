@@ -2,6 +2,7 @@ import { StyleSheet, Text,Image, View, TouchableOpacity, FlatList } from 'react-
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useKlocknerCategories } from '../hooks/useKlocknerCategories'
+import HeaderItem from './HeaderItem'
 
 const Header = () => {
 
@@ -34,10 +35,9 @@ const Header = () => {
               horizontal={true}
               keyExtractor={(item)=>item}
               renderItem={({item}) => 
-              <Text>{item}</Text>
+                <HeaderItem item={item} />
               }
             />
-        
         </View>
       </View>
     </View>

@@ -11,8 +11,9 @@ import { useNavigation } from '@react-navigation/native';
 
 const DetailScreen = () => {
 
-  const {deleteItemHeader} = useKlocknerCategories()
+  const {deleteItemHeader, selectedSubcategory} = useKlocknerCategories()
   const navigation = useNavigation()
+
 
   const handleBackBtn = () => {
     deleteItemHeader()
@@ -24,10 +25,17 @@ const DetailScreen = () => {
       <Header/>
       <View style={styles.container}>
         <TouchableOpacity onPress={()=> handleBackBtn()}>
-          <Text>Atras</Text>
+          <Text style={styles.title}>Atras</Text>
         </TouchableOpacity>
-        <BottomTab/>
+        <View>
+          {
+            selectedSubcategory.isLast 
+            ? null
+            : <ProductCategoryList categoryList={selectedSubcategory.subcategories} />
+          }
+        </View>
       </View>
+      <BottomTab/>
     </SafeAreaView>
   )
 }
@@ -46,7 +54,10 @@ const styles = StyleSheet.create({
   },
   container:{
     display: 'flex',
-    justifyContent:'space-between',
-    flex:1
+    flex:1,
+    backgroundColor:'#2F2E2E',
+  },
+  title: {
+    color:'white'
   }
 })
