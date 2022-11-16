@@ -1,8 +1,5 @@
-import { initializeApp } from "firebase/app"
-import { getFirestore } from 'firebase/firestore';
-import Constants from "expo-constants"
-import "firebase/auth"
-
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBHKHLK_EmhyeKqgr8toNsOIl8kVLXvrn8",
@@ -15,7 +12,7 @@ const firebaseConfig = {
   
 };
 
-// Initialize Firebase
-const firebase = initializeApp(firebaseConfig)
-const firestore = getFirestore();
-export default {firebase, firestore}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app)
+
+export {db}

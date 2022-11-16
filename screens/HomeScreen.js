@@ -5,8 +5,9 @@ import React, { useEffect, useState } from 'react'
 import ProductCategoryList from "../components/ProductCategoryList";
 import BottomTab from '../components/BottomTab'
 import Header from '../components/Header';
-import dataFirebase from '../firebaseConfig'
-import { getDatabase, ref, onValue} from "firebase/database";
+import {useKlocknerCategories} from '../hooks/useKlocknerCategories'
+
+import "firebase/auth/react-native"
 
 const data = [
     {
@@ -46,23 +47,14 @@ const windowWidth = Dimensions.get('window').width
 
 const HomeScreen = () => {
 
-  const {firebase, firestore} = dataFirebase
-
-  const [categories, setCategories] = useState([])
-
-  const fetchData = async () => {
-  }
-
-  useEffect(()=>{
-    fetchData()
-  },[])
+  const {categories} = useKlocknerCategories()
 
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header/>
       <View style={styles.container}>
-        <ProductCategoryList categoryList={data}  />
+        <ProductCategoryList categoryList={categories}  />
         <BottomTab/>
       </View>
     </SafeAreaView>

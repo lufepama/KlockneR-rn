@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
 
-const CategoryItem = ({item}) => {
+const CategoryItem = ({item, onUpdateHeader}) => {
 
   const navigation = useNavigation()
 
@@ -13,6 +13,7 @@ const CategoryItem = ({item}) => {
               style={styles.container} 
               activeOpacity={0.9} 
               onPress={()=>{
+                onUpdateHeader(item)
                 navigation.navigate('Detail')
               }}
               
