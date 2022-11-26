@@ -1,5 +1,5 @@
 import { SafeAreaView, StyleSheet,
-    Platform, StatusBar, View, Dimensions } 
+    Platform, StatusBar, View, Dimensions, Alert } 
     from 'react-native'
 import React, { useEffect, useState } from 'react'
 import ProductCategoryList from "../components/ProductCategoryList";

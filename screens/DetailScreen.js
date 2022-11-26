@@ -28,11 +28,7 @@ const DetailScreen = () => {
           <Text style={styles.title}>Atras</Text>
         </TouchableOpacity>
         <View>
-          {
-            selectedSubcategory.isLast 
-            ? null
-            : <ProductCategoryList categoryList={selectedSubcategory.subcategories} />
-          }
+          <ProductCategoryList categoryList={selectedSubcategory} />
         </View>
       </View>
       <BottomTab/>

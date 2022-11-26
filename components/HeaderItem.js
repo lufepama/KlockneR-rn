@@ -4,8 +4,10 @@ import React from 'react'
 const HeaderItem = ({item}) => {
 
   return (
-    <TouchableOpacity style={styles.container}>
-      <Text style={styles.title}>{item.toUpperCase()}</Text>
+    <TouchableOpacity style={styles.container} 
+        onPress={()=> {}}
+        >
+      <Text style={styles.title}>{item.title.toUpperCase()}</Text>
     </TouchableOpacity>
   )
 }

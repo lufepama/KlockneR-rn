@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {db} from '../firebase'
+import {db, mainItemsCol} from '../firebase'
 import { doc, getDocs, collection } from "firebase/firestore";
 
 const Context = React.createContext({})
@@ -7,20 +7,31 @@ const Context = React.createContext({})
 export const KlocknerCategoriesProvider = ({ children }) => {
 
     const [categories, setCategories] = useState([])
-    const [selectedSubcategory, setSelectedSubcategory ] = useState({})
+    const [selectedSubcategory, setSelectedSubcategory ] = useState([])
     const [isLoaded, setIsLoaded] = useState(false)
-    const [headerOptions, setHeaderOptions] = useState([])
+    const [headerOptions, setHeaderOptions] = useState([
+        {
+            docId:'',
+            title:'Klockner'
+        }
+    ])
 
     const fetchData = async () => {
-        const querySnapshot = await getDocs(collection(db, "category"));
-        querySnapshot.forEach((doc) => {
-          if (doc.data().data) {
-            setCategories(doc.data().data.subcategories)
-            setIsLoaded(true)
-          }
-        });
-      }
-      
+        
+        const querySnapshot = await getDocs(mainItemsCol)
+        const myData = []
+        querySnapshot.forEach((data) => {
+            if (data.data().isMain) {
+                const fullData = {
+                    docId: data.id,
+                    data:data.data()
+                }
+                myData.push(fullData)
+            }
+        } )
+        setCategories(myData)
+    }
+    
     useEffect(()=> {
         fetchData()
     },[])

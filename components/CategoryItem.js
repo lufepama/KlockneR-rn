@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import { useNavigation, useRoute} from '@react-navigation/native';
 
@@ -8,15 +8,19 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
 
   const navigation = useNavigation()
   const route = useRoute()
-
   const handlePress = () => {
+    if (!item.data.children) {
+      Alert.alert(
+        "Esta categoria no tiene mas elementos!"
+      )
+      return;
+    }
     onUpdateHeader(item)
     onSelectSubcategory(item)
     if (route.name != 'Detail') {
       navigation.navigate('Detail')
     }
   }
-
 
   return (
     <View style={styles.root}>
@@ -32,11 +36,10 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
           />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{item.title.toUpperCase()}</Text>
-          <Text style={styles.products}>{item.products} productos</Text>
+          <Text style={styles.title}>{item.data.title.toUpperCase()}</Text>
+          <Text style={styles.products}>{item.data.products} productos</Text>
         </View>
       </TouchableOpacity>
-      
     </View>
   )
 }

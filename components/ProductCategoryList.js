@@ -10,8 +10,7 @@ const ProductCategoryList = ({categoryList}) => {
   const onUpdateHeader = (item) => {
     addItemHeader(item)
   }
-
-
+  console.log({categoryList})
   return (
     <View style={styles.container}>
         <FlatList
@@ -19,7 +18,7 @@ const ProductCategoryList = ({categoryList}) => {
             numColumns={1}
             keyExtractor={(item)=>item.title}
             renderItem={({item}) => 
-            <CategoryItem item={item} key={item.title} onUpdateHeader={onUpdateHeader} onSelectSubcategory={onSelectSubcategory}/>
+            <CategoryItem item={item} key={item.data.title} onUpdateHeader={onUpdateHeader} onSelectSubcategory={onSelectSubcategory}/>
           }
         />
     </View>
