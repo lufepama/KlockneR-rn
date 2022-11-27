@@ -32,9 +32,8 @@ export const saveToken = async (token) => {
     return false
 }
 
-export const fetchCategoryList = async (fatherItem) => {
+export const fetchCategoryList = async (item) => {
 
-    const childrenItems = fatherItem.data.children
     const myNewCategory = []
     // const querySnapshot = await getDocs(mainItemsCol)
 
@@ -44,8 +43,8 @@ export const fetchCategoryList = async (fatherItem) => {
     //         console.log('Lo tenemosss!')
     //     }
     // })
-        
-    const q = query(mainItemsCol, where('__name__', "in", childrenItems));
+         
+    const q = query(mainItemsCol, where('foreignkey', "==", item.docId));
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((data) => {
@@ -57,6 +56,6 @@ export const fetchCategoryList = async (fatherItem) => {
             myNewCategory.push(fullData)
         }
     })
-
+    
     return myNewCategory
 }

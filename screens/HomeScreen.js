@@ -1,13 +1,15 @@
 import { SafeAreaView, StyleSheet,
-    Platform, StatusBar, View, Dimensions, Alert } 
+    Platform, StatusBar, View, Dimensions, ActivityIndicator } 
     from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import ProductCategoryList from "../components/ProductCategoryList";
 import BottomTab from '../components/BottomTab'
 import Header from '../components/Header';
 import {useKlocknerCategories} from '../hooks/useKlocknerCategories'
 
 import "firebase/auth/react-native"
+import { useHeader } from '../hooks/useHeader';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 const data = [
     {
@@ -47,14 +49,27 @@ const windowWidth = Dimensions.get('window').width
 
 const HomeScreen = () => {
 
-  const {categories} = useKlocknerCategories()
+  const {categories, isLoading} = useKlocknerCategories()
+  const navigation = useNavigation()
+  const {resetHeaderOptions} = useHeader()
+
+  useFocusEffect(
+    useCallback(()=>{
+      resetHeaderOptions()
+    },[])
+  )
 
   return (
     <SafeAreaView style={styles.mainContainer}>
       <Header/>
-      <View style={styles.container}>
-        <ProductCategoryList categoryList={categories}  />
-      </View>
+        <View style={styles.container}>
+          {
+            isLoading 
+            ? <ActivityIndicator size={'large'} color='#0000ff' />
+            : <ProductCategoryList categoryList={categories}  />
+          }
+          
+        </View>
       <BottomTab/>
     </SafeAreaView>
   )

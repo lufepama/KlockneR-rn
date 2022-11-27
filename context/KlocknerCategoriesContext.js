@@ -8,16 +8,10 @@ export const KlocknerCategoriesProvider = ({ children }) => {
 
     const [categories, setCategories] = useState([])
     const [selectedSubcategory, setSelectedSubcategory ] = useState([])
-    const [isLoaded, setIsLoaded] = useState(false)
-    const [headerOptions, setHeaderOptions] = useState([
-        {
-            docId:'',
-            title:'Klockner'
-        }
-    ])
+    const [isLoading, setIsLoading] = useState(false)
 
     const fetchData = async () => {
-        
+        setIsLoading(true)
         const querySnapshot = await getDocs(mainItemsCol)
         const myData = []
         querySnapshot.forEach((data) => {
@@ -29,7 +23,11 @@ export const KlocknerCategoriesProvider = ({ children }) => {
                 myData.push(fullData)
             }
         } )
-        setCategories(myData)
+        if (myData.length>0){
+            setCategories(myData)
+            setIsLoading(false)
+        }
+        
     }
     
     useEffect(()=> {
@@ -39,8 +37,7 @@ export const KlocknerCategoriesProvider = ({ children }) => {
     return (
         <Context.Provider value={{
             categories, setCategories,
-            isLoaded, setIsLoaded,
-            headerOptions, setHeaderOptions,
+            isLoading, setIsLoading,
             selectedSubcategory, setSelectedSubcategory
          }} >
             {children}

@@ -2,23 +2,25 @@ import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import CategoryItem from './CategoryItem'
 import { useKlocknerCategories } from '../hooks/useKlocknerCategories'
+import {useHeader} from '../hooks/useHeader'
 
 const ProductCategoryList = ({categoryList}) => {
 
-  const {addItemHeader, onSelectSubcategory} = useKlocknerCategories()
+  const {onSelectSubcategory} = useKlocknerCategories()
+  const {addItemHeader} = useHeader()
 
   const onUpdateHeader = (item) => {
     addItemHeader(item)
   }
-  console.log({categoryList})
+  
   return (
     <View style={styles.container}>
         <FlatList
             data={categoryList}
             numColumns={1}
-            keyExtractor={(item)=>item.title}
+            keyExtractor={item => item.docId}
             renderItem={({item}) => 
-            <CategoryItem item={item} key={item.data.title} onUpdateHeader={onUpdateHeader} onSelectSubcategory={onSelectSubcategory}/>
+            <CategoryItem item={item} key={item.docId} onUpdateHeader={onUpdateHeader} onSelectSubcategory={onSelectSubcategory}/>
           }
         />
     </View>

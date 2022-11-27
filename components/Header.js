@@ -1,15 +1,14 @@
 import { StyleSheet, Text,Image, View, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { useKlocknerCategories } from '../hooks/useKlocknerCategories'
 import HeaderItem from './HeaderItem'
+import { useHeader } from '../hooks/useHeader'
 
 const Header = () => {
 
-  const {headerOptions} = useKlocknerCategories()
-  
-  
+  const { headerOptions } = useHeader()
 
+  
   return (
     <View style={styles.root}>
       <View style={styles.upperContainer}>
@@ -33,9 +32,9 @@ const Header = () => {
               data={headerOptions}
               numColumns={1}
               horizontal={true}
-              keyExtractor={(item)=>item}
+              keyExtractor={item=>item.docId}
               renderItem={({item}) => 
-                <HeaderItem item={item} />
+                <HeaderItem item={item} key={item.docId}/>
               }
             />
         </View>

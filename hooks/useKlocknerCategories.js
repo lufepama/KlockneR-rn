@@ -5,35 +5,19 @@ import { fetchCategoryList } from '../helper/index'
 export const useKlocknerCategories = () => {
 
     const { categories, setCategories,
-        isLoaded, setIsLoaded,
-        headerOptions, setHeaderOptions,
+        isLoading, setIsLoading,
         selectedSubcategory, setSelectedSubcategory
-    } 
-        = useContext(KlocknerCategoriesContext)
+    } = useContext(KlocknerCategoriesContext)
     
-    const addItemHeader = (item) => {
-        const itemTitle = item.data.title
-        const dicItem = {
-            docId:item.id,
-            title:itemTitle
-        }
-        const myHeader = headerOptions
-        myHeader.push(dicItem)
-        setHeaderOptions(myHeader)
-    }
-
-    const deleteItemHeader = () => {
-        const myHeader = headerOptions
-        myHeader.pop()
-        setHeaderOptions(myHeader)
-    }
-
     const onSelectSubcategory = async (myItem) => {
         try {
+            setIsLoading(true)
             const newCateoryList = await fetchCategoryList(myItem)
-            if (newCateoryList.length > 0) {   
+            if (newCateoryList) {
                 setSelectedSubcategory(newCateoryList)
+                setIsLoading(false)
             }
+           
         } catch (error) {
             console.log("Este no tiene hijos!")
         }
@@ -41,11 +25,8 @@ export const useKlocknerCategories = () => {
 
     return {
             categories,
-            isLoaded, 
-            headerOptions,
+            isLoading, 
             selectedSubcategory,
-            addItemHeader,
-            deleteItemHeader,
             onSelectSubcategory,
         }
 }

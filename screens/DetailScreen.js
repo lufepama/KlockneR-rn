@@ -1,17 +1,19 @@
 import { SafeAreaView, StyleSheet,
-  Platform, StatusBar, View, Dimensions, TouchableOpacity, Text } 
+  Platform, StatusBar, View, Dimensions, TouchableOpacity, Text, ActivityIndicator } 
   from 'react-native'
 import React from 'react'
 import ProductCategoryList from "../components/ProductCategoryList";
 import BottomTab from '../components/BottomTab'
 import Header from '../components/Header';
 import { useKlocknerCategories } from '../hooks/useKlocknerCategories';
+import { useHeader } from '../hooks/useHeader';
 import { useNavigation } from '@react-navigation/native';
 
 
 const DetailScreen = () => {
 
-  const {deleteItemHeader, selectedSubcategory} = useKlocknerCategories()
+  const {selectedSubcategory, isLoading} = useKlocknerCategories()
+  const {deleteItemHeader} = useHeader()
   const navigation = useNavigation()
 
 
@@ -28,7 +30,12 @@ const DetailScreen = () => {
           <Text style={styles.title}>Atras</Text>
         </TouchableOpacity>
         <View>
-          <ProductCategoryList categoryList={selectedSubcategory} />
+          {
+            isLoading
+            ? <ActivityIndicator size={'large'} color='#0000ff' />
+            : <ProductCategoryList categoryList={selectedSubcategory} />
+          }
+          
         </View>
       </View>
       <BottomTab/>

@@ -9,12 +9,12 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
   const navigation = useNavigation()
   const route = useRoute()
   const handlePress = () => {
-    if (!item.data.children) {
-      Alert.alert(
-        "Esta categoria no tiene mas elementos!"
-      )
-      return;
-    }
+    // if (!item.data) {
+    //   Alert.alert(
+    //     "Esta categoria no tiene mas elementos!"
+    //   )
+    //   return;
+    // }
     onUpdateHeader(item)
     onSelectSubcategory(item)
     if (route.name != 'Detail') {
@@ -23,7 +23,7 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
   }
 
   return (
-    <View style={styles.root}>
+    <View style={styles.root} key={item.docId}>
       <TouchableOpacity 
               style={styles.container} 
               activeOpacity={0.9} 
