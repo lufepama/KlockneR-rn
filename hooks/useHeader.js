@@ -6,7 +6,7 @@ import KlocknerCategoriesContext from '../context/KlocknerCategoriesContext'
 export const useHeader = () => {
 
     const { headerOptions, setHeaderOptions } = useContext(HeaderContext)
-    const { setSelectedSubcategory} = useContext(KlocknerCategoriesContext)
+    const { setSelectedSubcategory, fetchData} = useContext(KlocknerCategoriesContext)
 
     const addItemHeader = (item) => {
         const itemTitle = item.data.title

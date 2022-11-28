@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import {db, mainItemsCol} from '../firebase'
-import { doc, getDocs, collection } from "firebase/firestore";
+import { mainItemsCol } from '../firebase'
+import { getDocs} from "firebase/firestore";
 
 const Context = React.createContext({})
 
@@ -9,6 +9,7 @@ export const KlocknerCategoriesProvider = ({ children }) => {
     const [categories, setCategories] = useState([])
     const [selectedSubcategory, setSelectedSubcategory ] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+
 
     const fetchData = async () => {
         setIsLoading(true)
@@ -38,7 +39,7 @@ export const KlocknerCategoriesProvider = ({ children }) => {
         <Context.Provider value={{
             categories, setCategories,
             isLoading, setIsLoading,
-            selectedSubcategory, setSelectedSubcategory
+            selectedSubcategory, setSelectedSubcategory,
          }} >
             {children}
         </Context.Provider>

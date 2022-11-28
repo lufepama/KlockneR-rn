@@ -9,18 +9,14 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
   const navigation = useNavigation()
   const route = useRoute()
   const handlePress = () => {
-    // if (!item.data) {
-    //   Alert.alert(
-    //     "Esta categoria no tiene mas elementos!"
-    //   )
-    //   return;
-    // }
     onUpdateHeader(item)
     onSelectSubcategory(item)
     if (route.name != 'Detail') {
       navigation.navigate('Detail')
     }
   }
+
+  console.log(item.image)
 
   return (
     <View style={styles.root} key={item.docId}>
@@ -32,7 +28,7 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
         <View style={styles.imageContainer}>
           <Image
             style={styles.image}
-            source={{uri:'https://reactnative.dev/img/tiny_logo.png'}}
+            source={{uri: item.data.image}}
           />
         </View>
         <View style={styles.textContainer}>
