@@ -9,8 +9,7 @@ const BottomTab = () => {
             <View style={styles.mainContainer} >
                 <BottomElementTab text='Buscador' icon='search' screenToNavigate='Home' />
                 <BottomElementTab text='Mis ofertas' icon='briefcase' screenToNavigate='Home' />
-                <BottomElementTab text='CV' icon='user' screenToNavigate='Home' />
-                <BottomElementTab text='Novedades' icon='bell' isNotification={true} screenToNavigate='Home' />
+                <BottomElementTab text='CV' icon='user' screenToNavigate='Signup' />
             </View>
         </View>
     )
