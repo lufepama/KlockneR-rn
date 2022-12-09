@@ -5,18 +5,14 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import { Input,  } from '@rneui/themed'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import { useNavigation } from '@react-navigation/native'
 
-
-
-const SignupScreen = () => {
+const LoginScreen = () => {
 
     const [userData, setUserData] = useState({
         email:'',
         password:'',
         password2:''
     })
-    const navigation = useNavigation()
 
     const {email, password, password2} = userData
 
@@ -25,7 +21,7 @@ const SignupScreen = () => {
         <Header/>
         <View style={styles.boxContainer}>
                 <Text style={styles.title}>
-                    Signup
+                    Login
                 </Text>
             <View style={styles.inputContainer}>
                
@@ -42,26 +38,10 @@ const SignupScreen = () => {
                     secureTextEntry={true}
                     onChangeText={value => setUserData({...userData, password:value})}
                 />
-                 <Input
-                    placeholder="Password"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    style={{marginLeft:20}}
-                    secureTextEntry={true}
-                    onChangeText={value => setUserData({...userData, password2:value})}
-                />
-            </View>
-            <View style={styles.loginContainer}>
-                <Text>Ya tienes una cuenta?</Text>
-                <Text 
-                    style={styles.loginText}
-                    onPress={()=> navigation.navigate('Login')}
-                    >
-                        Logeate!
-                </Text>
             </View>
             <View style={styles.bottonsContainer}>
                 <TouchableOpacity style={styles.signupBtn}>
-                    <Text style={styles.textBtn}>Signup</Text>
+                    <Text style={styles.textBtn}>Login</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.signupOptionsContainer}>
@@ -78,7 +58,7 @@ const SignupScreen = () => {
   )
 }
 
-export default SignupScreen
+export default LoginScreen
 
 const windowHeight = Dimensions.get('window').height
 const windowWidth = Dimensions.get('window').width
@@ -131,14 +111,5 @@ const styles = StyleSheet.create({
         marginRight:10,
 
     },
-    loginContainer:{
-        display:'flex',
-        flexDirection:'row',
-        marginBottom:10
-    },
-    loginText:{
-        marginLeft:10,
-        color:'blue'
-    }
 
 })
