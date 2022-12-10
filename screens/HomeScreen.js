@@ -10,6 +10,7 @@ import {useKlocknerCategories} from '../hooks/useKlocknerCategories'
 import "firebase/auth/react-native"
 import { useHeader } from '../hooks/useHeader';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { retrieveToken } from '../storage';
 
 const data = [
     {
@@ -56,6 +57,7 @@ const HomeScreen = () => {
   useFocusEffect(
     useCallback(()=>{
       resetHeaderOptions()
+      retrieveToken()
     },[])
   )
 

@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {db, mainItemsCol} from '../firebase'
 import { doc, getDocs, collection, query, where} from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
+
+
+const auth = getAuth()
 
 export const getCredentials = async () => {
     const response = await AsyncStorage.getItem('user')
@@ -62,10 +65,20 @@ export const fetchCategoryList = async (item) => {
 }
 
 export const signupService  = async ({email, password}) => {
-    const auth = getAuth()
 
     const resp = await createUserWithEmailAndPassword(auth, email, password)
 
     return resp
 
+}
+
+export const loginService = async ({email, password}) => {
+
+    try {
+        const resp = await signInWithEmailAndPassword(auth, email, password)
+        return resp
+    } catch (error) {
+        return error
+    }
+    
 }

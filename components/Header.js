@@ -1,21 +1,56 @@
-import { StyleSheet, Text,Image, View, TouchableOpacity, FlatList } from 'react-native'
+import { StyleSheet, Text,Image, View, TouchableOpacity, FlatList, Alert } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import HeaderItem from './HeaderItem'
 import { useHeader } from '../hooks/useHeader'
+import { useAuth } from '../hooks/useAuth'
 
 const Header = () => {
 
   const { headerOptions } = useHeader()
-
+  const { isUserLogged, onLogout } = useAuth()
   
+  const handleLogout = async () => {
+    await onLogout()
+  }
+
+  const createLogoutAlert = () => {
+    Alert.alert(
+      'Cerrar sesion',
+      'Estas seguro que quieres cerrar sesion?',
+      [
+        {
+          text:'Si',
+          onPress: async () => handleLogout()
+        },
+        {
+          text:'Cancelar',
+          style:'cancel'
+        }
+      ]
+    )
+  }
+
   return (
     <View style={styles.root}>
       <View style={styles.upperContainer}>
+          
         <Image
           style={styles.image}
           source= {{uri:'https://pbs.twimg.com/profile_images/1085092808527151106/9u65sUeD_400x400.jpg'}}
         />
+
+        { 
+          isUserLogged && <Icon
+            onPress={()=>{
+              createLogoutAlert()
+            }}
+            name='sign-out'
+            color={'white'}
+            style={styles.logoutBtn}
+            size={35}
+          />
+        }
       </View> 
       <View style={styles.lowerContainer}>
         <TouchableOpacity 
@@ -53,7 +88,8 @@ const styles = StyleSheet.create({
   },
   upperContainer:{ 
     display:'flex',
-    flexDirection:'row-reverse',
+    flexDirection:'row',
+    justifyContent:'space-between',
     alignItems: 'flex-end',
     backgroundColor: 'black',
     height:30,
@@ -78,5 +114,8 @@ const styles = StyleSheet.create({
     marginLeft:30,
     fontSize: 20,
     fontWeight: 'bold'
+  },
+  logoutBtn:{
+
   }
 })

@@ -5,14 +5,10 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import { Input,  } from '@rneui/themed'
 import Icon from 'react-native-vector-icons/FontAwesome'
-<<<<<<< HEAD
+
 import { useAuth } from '../hooks/useAuth'
 import AlertMessage from '../components/AlertMessage'
-=======
 import { useNavigation } from '@react-navigation/native'
-
-
->>>>>>> refs/remotes/origin/main
 
 const SignupScreen = () => {
 
@@ -37,7 +33,7 @@ const SignupScreen = () => {
     
     const {email, password, password2, isError,  errorMessage} = userData
 
-<<<<<<< HEAD
+
     return (
         <View style={styles.mainContainer}>
             <Header/>
@@ -76,6 +72,19 @@ const SignupScreen = () => {
                     ? <AlertMessage title={errorMessage} />
                     :null
                 }
+                <View style={styles.loginContainer}>
+                    <Text>
+                        Ya tienes cuenta?
+                    </Text>
+                    <Text 
+                        style={styles.loginText}
+                        onPress={() => {
+                            navigation.navigate('Login')
+                        }}
+                        >
+                            Logeate!
+                    </Text>
+                </View>
                 <View style={styles.bottonsContainer}>
                     <TouchableOpacity 
                     style={styles.signupBtn}
@@ -93,62 +102,9 @@ const SignupScreen = () => {
                         <Text style={styles.textBtn}>Google</Text>
                     </TouchableOpacity>
                 </View>
-=======
-  return (
-    <View style={styles.mainContainer}>
-        <Header/>
-        <View style={styles.boxContainer}>
-                <Text style={styles.title}>
-                    Signup
-                </Text>
-            <View style={styles.inputContainer}>
-               
-                <Input
-                    placeholder="Email"
-                    leftIcon={{ type: 'font-awesome', name: 'user' }}
-                    style={{marginLeft:20}}
-                    onChangeText={value => setUserData({...userData, email:value})}
-                />
-                <Input
-                    placeholder="Password"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    style={{marginLeft:20}}
-                    secureTextEntry={true}
-                    onChangeText={value => setUserData({...userData, password:value})}
-                />
-                 <Input
-                    placeholder="Password"
-                    leftIcon={{ type: 'font-awesome', name: 'lock' }}
-                    style={{marginLeft:20}}
-                    secureTextEntry={true}
-                    onChangeText={value => setUserData({...userData, password2:value})}
-                />
-            </View>
-            <View style={styles.loginContainer}>
-                <Text>Ya tienes una cuenta?</Text>
-                <Text 
-                    style={styles.loginText}
-                    onPress={()=> navigation.navigate('Login')}
-                    >
-                        Logeate!
-                </Text>
-            </View>
-            <View style={styles.bottonsContainer}>
-                <TouchableOpacity style={styles.signupBtn}>
-                    <Text style={styles.textBtn}>Signup</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.signupOptionsContainer}>
-                <TouchableOpacity style={styles.googleBtn}>
-                  <Icon
-                    name={'google'}
-                    style={styles.googleIcon}
-                  />
-                    <Text style={styles.textBtn}>Google</Text>
-                </TouchableOpacity>
->>>>>>> refs/remotes/origin/main
-            </View>
         </View>
+        </View>
+
   )
 }
 
@@ -204,8 +160,6 @@ const styles = StyleSheet.create({
         fontSize:35,
         marginRight:10,
     },
-<<<<<<< HEAD
-=======
     loginContainer:{
         display:'flex',
         flexDirection:'row',
@@ -215,6 +169,4 @@ const styles = StyleSheet.create({
         marginLeft:10,
         color:'blue'
     }
-
->>>>>>> refs/remotes/origin/main
 })

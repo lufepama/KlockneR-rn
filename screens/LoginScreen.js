@@ -5,16 +5,31 @@ import React, { useState } from 'react'
 import Header from '../components/Header'
 import { Input,  } from '@rneui/themed'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { useAuth } from '../hooks/useAuth'
+import {retrieveToken} from '../storage/index'
+import { useNavigation } from '@react-navigation/native'
 
 const LoginScreen = () => {
 
     const [userData, setUserData] = useState({
-        email:'',
-        password:'',
-        password2:''
+        email:'pipe@gmail.com',
+        password:'1234567',
+        isError:false,
+        errorMessage:''
     })
+    const { onLogin } = useAuth()
+    const navigation = useNavigation()
 
-    const {email, password, password2} = userData
+    const {email, password, isError, errorMessage} = userData
+
+    const handleLogin = async () => {
+        const resp = await onLogin(userData)
+        if (resp.error) {
+            setUserData({...userData, isError:true, error:'Ha habido un error, comprueba que las credenciales son correctas'})
+            return
+        }
+        navigation.navigate('Home')
+    }   
 
   return (
     <View style={styles.mainContainer}>
@@ -27,12 +42,14 @@ const LoginScreen = () => {
                
                 <Input
                     placeholder="Email"
+                    value={email}
                     leftIcon={{ type: 'font-awesome', name: 'user' }}
                     style={{marginLeft:20}}
                     onChangeText={value => setUserData({...userData, email:value})}
                 />
                 <Input
                     placeholder="Password"
+                    value={password}
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     style={{marginLeft:20}}
                     secureTextEntry={true}
@@ -40,12 +57,21 @@ const LoginScreen = () => {
                 />
             </View>
             <View style={styles.bottonsContainer}>
-                <TouchableOpacity style={styles.signupBtn}>
+                <TouchableOpacity 
+                    style={styles.signupBtn}
+                    onPress={ ()=> {
+                        handleLogin()
+                     }}
+                    >
                     <Text style={styles.textBtn}>Login</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.signupOptionsContainer}>
-                <TouchableOpacity style={styles.googleBtn}>
+                <TouchableOpacity   style={styles.googleBtn}
+                    onPress={async ()=> {
+                        await retrieveToken()
+                    }}
+                >
                   <Icon
                     name={'google'}
                     style={styles.googleIcon}

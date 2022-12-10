@@ -1,12 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AuthContext from '../context/AuthContext'
-import {signupService} from '../helper/index'
+import {signupService, loginService} from '../helper/index'
+import {storeToken} from '../storage/index'
+import {removeToken} from '../storage/index'
 
 export const useAuth = () => {
 
     const { userInfo, token, isUserLogged, setUserInfo, setToken, setIsUserLogged } = useContext(AuthContext)
 
-    const onLogin = () => {}
+    const onLogin = async (formData) => {
+        const res = await loginService(formData)
+        await storeToken(res._tokenResponse)
+        await setIsUserLogged(true)
+        return res
+    }
 
     const onSignUp = async (formData) => {
         const data = {email:formData.email, password:formData.password}
@@ -19,6 +26,11 @@ export const useAuth = () => {
         }
     }
 
+    const onLogout = async () => {
+        const resp = await removeToken()
+        setIsUserLogged(false)
+    }
+
     useEffect(() => {
 
         if (!token) {
@@ -28,6 +40,8 @@ export const useAuth = () => {
     }, [token])
 
     return { userInfo, token, isUserLogged, setUserInfo, setToken, setIsUserLogged,
-        onSignUp
+        onSignUp,
+        onLogin,
+        onLogout
     }
 }
