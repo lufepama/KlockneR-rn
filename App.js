@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import GeneralNavigator from './components/GeneralNavigator';
-import { UserInformationProvider } from './context/UserInformationContext'
+import { AuthProvider } from './context/AuthContext';
 
 export default function App() {
 
   return (
-    <UserInformationProvider>
+    <AuthProvider>
       <GeneralNavigator />
-    </UserInformationProvider>
+    </AuthProvider>
   );
 }
 

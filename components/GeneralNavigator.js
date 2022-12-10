@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useUserInfo } from '../hooks/useUserInfo';
+import { useAuth } from '../hooks/useAuth';
 import { getCredentials } from '../helper';
 import MainFlow from '../screens/MainFlow';
 
@@ -9,7 +9,7 @@ const StackNavigator = createNativeStackNavigator()
 
 const GeneralNavigator = () => {
 
-    const { isUserLogged, setIsUserLogged } = useUserInfo();
+    const { isUserLogged, setIsUserLogged } = useAuth();
 
     const getUserCredentials = async () => {
         const user = await getCredentials()
