@@ -2,7 +2,7 @@ import { SafeAreaView, StyleSheet,
     Platform, StatusBar, View, Dimensions, TouchableOpacity, Text, ActivityIndicator } 
     from 'react-native'
 import React, { useState } from 'react'
-import Header from '../components/Header'
+import Header from '../components/Header/Header'
 import { Input,  } from '@rneui/themed'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useAuth } from '../hooks/useAuth'

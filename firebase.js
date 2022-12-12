@@ -14,10 +14,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app)
+const db = getFirestore(app);
 
-const mainItemsCol = collection(db, "category")
+const mainItemsCol = collection(db, "category");
+const productsCol = collection(db, 'products');
+const ordersCol = collection(db, 'orders');
 
-const auth = getAuth(app)
 
-export {db, mainItemsCol, auth}
+const auth = getAuth(app);
+
+export {
+        db, mainItemsCol, auth,
+        productsCol, ordersCol
+      }

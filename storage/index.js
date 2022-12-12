@@ -11,7 +11,6 @@ export const storeToken = async (data) => {
 export const retrieveToken = async () => {
     try {
         const query = await SecureStore.getItemAsync('tokenId')
-        console.log(query)
         return query
     } catch (error) {
         console.log(error)
@@ -21,7 +20,6 @@ export const retrieveToken = async () => {
 export const removeToken = async () => {
     
     try {
-        console.log(";")
         const resp = await SecureStore.deleteItemAsync('tokenId')
         return resp
     } catch (error) {

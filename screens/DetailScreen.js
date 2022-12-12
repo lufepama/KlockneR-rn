@@ -2,12 +2,13 @@ import { SafeAreaView, StyleSheet,
   Platform, StatusBar, View, Dimensions, TouchableOpacity, Text, ActivityIndicator } 
   from 'react-native'
 import React from 'react'
-import ProductCategoryList from "../components/ProductCategoryList";
-import BottomTab from '../components/BottomTab'
-import Header from '../components/Header';
+import ProductCategoryList from "../components/Categories/ProductCategoryList";
+import BottomTab from '../components/Menu/BottomTab'
+import Header from '../components/Header/Header';
 import { useKlocknerCategories } from '../hooks/useKlocknerCategories';
 import { useHeader } from '../hooks/useHeader';
 import { useNavigation } from '@react-navigation/native';
+import TopHeader from '../components/Header/TopHeader';
 
 
 const DetailScreen = () => {
@@ -24,6 +25,7 @@ const DetailScreen = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <TopHeader/>
       <Header/>
       <View style={styles.container}>
         <TouchableOpacity onPress={()=> handleBackBtn()}>
@@ -54,10 +56,12 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight: 0,
     height: windowHeight,
     width: windowWidth,
+    display:'flex',
+    flexDirection:'column',
   },
   container:{
     display: 'flex',
-    flex:1,
+    flex:2,
     backgroundColor:'#2F2E2E',
   },
   title: {

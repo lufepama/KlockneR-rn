@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import GeneralNavigator from './components/GeneralNavigator';
+import GeneralNavigator from './components/Shared/GeneralNavigator';
 import { AuthProvider } from './context/AuthContext';
 
 export default function App() {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useAuth } from '../hooks/useAuth';
-import { getCredentials } from '../helper';
-import MainFlow from '../screens/MainFlow';
+import { useAuth } from '../../hooks/useAuth';
+import { getCredentials } from '../../helper/index';
+import MainFlow from '../../screens/MainFlow';
 
 const StackNavigator = createNativeStackNavigator()
 

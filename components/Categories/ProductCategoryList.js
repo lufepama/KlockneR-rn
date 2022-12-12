@@ -1,8 +1,8 @@
 import { FlatList, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import CategoryItem from './CategoryItem'
-import { useKlocknerCategories } from '../hooks/useKlocknerCategories'
-import {useHeader} from '../hooks/useHeader'
+import CategoryItem from '../Categories/CategoryItem'
+import { useKlocknerCategories } from '../../hooks/useKlocknerCategories'
+import {useHeader} from '../../hooks/useHeader'
 
 const ProductCategoryList = ({categoryList}) => {
 

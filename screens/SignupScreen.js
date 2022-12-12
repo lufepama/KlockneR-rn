@@ -2,12 +2,12 @@ import { SafeAreaView, StyleSheet,
     Platform, StatusBar, View, Dimensions, TouchableOpacity, Text, ActivityIndicator } 
     from 'react-native'
 import React, { useState } from 'react'
-import Header from '../components/Header'
+import Header from '../components/Header/Header'
 import { Input,  } from '@rneui/themed'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { useAuth } from '../hooks/useAuth'
-import AlertMessage from '../components/AlertMessage'
+import AlertMessage from '../components/Shared/AlertMessage'
 import { useNavigation } from '@react-navigation/native'
 
 const SignupScreen = () => {

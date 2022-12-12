@@ -2,9 +2,10 @@ import { SafeAreaView, StyleSheet,
     Platform, StatusBar, View, Dimensions, ActivityIndicator } 
     from 'react-native'
 import React, { useCallback, useEffect } from 'react'
-import ProductCategoryList from "../components/ProductCategoryList";
-import BottomTab from '../components/BottomTab'
-import Header from '../components/Header';
+import ProductCategoryList from "../components/Categories/ProductCategoryList";
+import BottomTab from '../components/Menu/BottomTab'
+import TopHeader from '../components/Header/TopHeader';
+import Header from '../components/Header/Header';
 import {useKlocknerCategories} from '../hooks/useKlocknerCategories'
 
 import "firebase/auth/react-native"
@@ -63,15 +64,17 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.mainContainer}>
+      <TopHeader/>
       <Header/>
-        <View style={styles.container}>
-          {
-            isLoading 
-            ? <ActivityIndicator size={'large'} color='#0000ff' />
-            : <ProductCategoryList categoryList={categories}  />
-          }
-          
-        </View>
+      
+      <View style={styles.container}>
+        {
+          isLoading 
+          ? <ActivityIndicator size={'large'} color='#0000ff' />
+          : <ProductCategoryList categoryList={categories}  />
+        }
+        
+      </View>
       <BottomTab/>
     </SafeAreaView>
   )
@@ -85,11 +88,13 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight: 0,
     height: windowHeight,
     width: windowWidth,
+    display:'flex',
+    flexDirection:'column',
   },
   container:{
     display: 'flex',
     justifyContent:'space-between',
     backgroundColor:'#2F2E2E',
-    flex:1
+    flex:2
   }
 })

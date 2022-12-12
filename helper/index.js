@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {db, mainItemsCol} from '../firebase'
+import {db, mainItemsCol, productsCol, ordersCol} from '../firebase'
 import { doc, getDocs, collection, query, where} from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from 'firebase/auth';
 
@@ -39,15 +39,6 @@ export const saveToken = async (token) => {
 export const fetchCategoryList = async (item) => {
 
     const myNewCategory = []
-    // const querySnapshot = await getDocs(mainItemsCol)
-
-    // querySnapshot.forEach((data) => {
-    //     console.log('pase', childrenItems)
-    //     if (childrenItems.includes(data.id)) {
-    //         console.log('Lo tenemosss!')
-    //     }
-    // })
-         
     const q = query(mainItemsCol, where('foreignkey', "==", item.docId));
     const querySnapshot = await getDocs(q);
 
@@ -79,6 +70,29 @@ export const loginService = async ({email, password}) => {
         return resp
     } catch (error) {
         return error
+    }   
+}
+
+
+export const fetchProducts = async (foreignKey) => {
+
+    try {
+        const q = query(productsCol, where('foreignkey', "==", foreignKey));
+        const querySnapshot = await getDocs(q)
+        const productList = []
+        querySnapshot.forEach(data => { 
+            if (data.data()) {
+                const fullData = {
+                    docId: data.id,
+                    data:data.data()
+                }
+                productList.push(fullData)
+            }
+        })
+        return productList
+
+    } catch (error) {
+        console.log({error})
     }
-    
+
 }

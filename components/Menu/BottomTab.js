@@ -8,7 +8,7 @@ const BottomTab = () => {
         <View style={styles.root}>
             <View style={styles.mainContainer} >
                 <BottomElementTab text='Buscador' icon='search' screenToNavigate='Home' />
-                <BottomElementTab text='Mis ofertas' icon='briefcase' screenToNavigate='Home' />
+                <BottomElementTab text='Carrito' icon='shopping-cart' screenToNavigate='Cart' />
                 <BottomElementTab text='CV' icon='user' screenToNavigate='Signup' />
             </View>
         </View>

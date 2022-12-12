@@ -19,7 +19,7 @@ export const useKlocknerCategories = () => {
             }
            
         } catch (error) {
-            console.log("Este no tiene hijos!")
+            console.log(error)
         }
     }
 

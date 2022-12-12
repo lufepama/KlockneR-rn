@@ -1,14 +1,21 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, Alert } from 'react-native'
 import React from 'react'
 import { useNavigation, useRoute} from '@react-navigation/native';
-
+import { useShop } from '../../hooks/useShop';
 
 
 const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
 
   const navigation = useNavigation()
   const route = useRoute()
-  const handlePress = () => {
+  const { getProducts } = useShop()
+
+  const handlePress = async () => {
+    if (item.data?.hasProducts) {
+      await getProducts(item.docId)
+      navigation.navigate('Shop')
+      return
+    }
     onUpdateHeader(item)
     onSelectSubcategory(item)
     if (route.name != 'Detail') {
@@ -16,7 +23,6 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
     }
   }
 
-  console.log(item.image)
 
   return (
     <View style={styles.root} key={item.docId}>

@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { useKlocknerCategories } from '../hooks/useKlocknerCategories'
-import { useHeader } from '../hooks/useHeader'
+import { useHeader } from '../../hooks/useHeader'
 import { useNavigation } from '@react-navigation/native'
 
 const HeaderItem = ({item}) => {
