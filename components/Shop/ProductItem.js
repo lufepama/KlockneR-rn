@@ -1,18 +1,32 @@
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { useShop } from '../../hooks/useShop'
 
 const ProductItem = ({item}) => {
 
   const [counter, setCounter] = useState(0)
-  const { showCart, addItemCart } = useShop()
+  const [isInCart, setIsInCart] = useState(false)
+  const { isItemInCart, addItemCart } = useShop()
  
   const handleAddItem = () => {
     if (counter>0) {
       addItemCart(item, counter)
+      setIsInCart(true)
     }
   }
+
+  const setInitialValues = () => {
+    const res = isItemInCart(item.docId)
+    if (res) {
+      setCounter(res.number)
+      setIsInCart(true)
+    }
+  }
+ 
+  useEffect(()=> {
+    setInitialValues()
+  },[])
 
   return (
     <View style={styles.root} key={item.docId}>
@@ -29,30 +43,32 @@ const ProductItem = ({item}) => {
         </View>
         <View style={styles.contentContainer}>
           <Text style={styles.title}>{item.data.title.toUpperCase()}</Text>
+          <Text style={styles.price}>{item.data.price}€</Text>
           <View style={styles.cartBtnsContainer}>
             <TouchableOpacity style={styles.cartBtn} onPress={()=> {
               if (counter>0) {
                 setCounter(prev => prev-1)
               }
-            }}>
+            }} disabled={isInCart}>
               <Icon 
                 name='minus'
                 size={20}
               />
             </TouchableOpacity>
             <Text>{counter}</Text>
-            <TouchableOpacity style={styles.cartBtn} onPress={() => {setCounter(prev => prev+1)}}>
+            <TouchableOpacity style={styles.cartBtn} onPress={() => {setCounter(prev => prev+1)}} disabled={isInCart}>
               <Icon 
                 name='plus'
                 size={20}
               />
             </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.addBtn} onPress={ () => {handleAddItem()}}>
-          <Text style={styles.addText}>Add</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.addBtn} onPress={ () => {showCart()}}>
-          <Text style={styles.addText}>Show</Text>
+        <TouchableOpacity style={styles.addBtn} onPress={ () => {handleAddItem()}} disabled={isInCart}>
+            {
+              isInCart
+              ? <Text style={styles.addText}>Ya lo tienes</Text>
+              : <Text style={styles.isAddedText}>Add</Text>
+            }
         </TouchableOpacity>
         </View>
       </View>
@@ -110,16 +126,21 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignSelf:'center',
-    width:'50%'
+    width:'50%',
   },
   addBtn:{
     width:'50%',
-    backgroundColor:'#FDFF7E',
+    backgroundColor:'#61CF52',
     alignItems:'center',
     borderRadius:20,
-    alignSelf:'center'
+    alignSelf:'center',
   },
   addText: {
     fontSize:17
+  },
+  price:{
+    fontSize:15
+
+
   }
 })

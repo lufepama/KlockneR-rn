@@ -8,11 +8,12 @@ const CategoryItem = ({item, onUpdateHeader, onSelectSubcategory}) => {
 
   const navigation = useNavigation()
   const route = useRoute()
-  const { getProducts } = useShop()
+  const { getProducts, updateShopTitle } = useShop()
 
   const handlePress = async () => {
     if (item.data?.hasProducts) {
       await getProducts(item.docId)
+      updateShopTitle(item.data?.title)
       navigation.navigate('Shop')
       return
     }

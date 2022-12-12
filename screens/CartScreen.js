@@ -3,6 +3,7 @@ import Header from '../components/Header/Header'
 import TopHeader from '../components/Header/TopHeader'
 import BottomTab from '../components/Menu/BottomTab'
 import React from 'react'
+import HeaderScreens from '../components/Shared/HeaderScreens'
 
 const CartScreen = () => {
 
@@ -10,8 +11,8 @@ const CartScreen = () => {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <TopHeader/>
+      <HeaderScreens title='Carrito' iconName='shopping-cart' />
       <View style={styles.container}>
-        
       </View>
       <BottomTab/>
     </SafeAreaView>
