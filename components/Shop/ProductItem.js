@@ -30,7 +30,7 @@ const ProductItem = ({item}) => {
 
   return (
     <View style={styles.root} key={item.docId}>
-        <View 
+      <View 
             style={styles.container} 
             activeOpacity={0.9} 
             onPress={()=>handlePress()}

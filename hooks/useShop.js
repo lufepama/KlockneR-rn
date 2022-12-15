@@ -39,6 +39,7 @@ export const useShop = () => {
     return {
         products,
         shopTitle,
+        cart,
         getProducts,
         addItemCart,
         isItemInCart,

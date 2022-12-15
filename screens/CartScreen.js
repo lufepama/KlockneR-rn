@@ -4,8 +4,12 @@ import TopHeader from '../components/Header/TopHeader'
 import BottomTab from '../components/Menu/BottomTab'
 import React from 'react'
 import HeaderScreens from '../components/Shared/HeaderScreens'
+import {useShop} from '../hooks/useShop'
+import CartItemList from '../components/Cart/CartItemList'
 
 const CartScreen = () => {
+
+
 
 
   return (
@@ -13,6 +17,7 @@ const CartScreen = () => {
       <TopHeader/>
       <HeaderScreens title='Carrito' iconName='shopping-cart' />
       <View style={styles.container}>
+        <CartItemList/>
       </View>
       <BottomTab/>
     </SafeAreaView>
@@ -35,6 +40,7 @@ const styles = StyleSheet.create({
     },
     container:{
         display: 'flex',
+        width:'100%',
         flex:2,
         backgroundColor:'#2F2E2E',
     },
