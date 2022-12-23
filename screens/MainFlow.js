@@ -5,6 +5,7 @@ import SignupScreen from './SignupScreen';
 import LoginScreen from './LoginScreen';
 import ShopScreen from './ShopScreen';
 import CartScreen from './CartScreen';
+import CheckoutScreen from './CheckoutScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { KlocknerCategoriesProvider } from '../context/KlocknerCategoriesContext';
 import { HeaderProvider } from '../context/HeaderContext';
@@ -32,6 +33,7 @@ const MainFlow = () => {
                                 />
                         <MainFlowStack.Screen name="Shop" component={ShopScreen} options={{ headerShown: false }} />
                         <MainFlowStack.Screen name="Cart" component={CartScreen} options={{ headerShown: false }} />
+                        <MainFlowStack.Screen name="Checkout" component={CheckoutScreen} options={{ headerShown: false }} />
                     </MainFlowStack.Navigator>
                 </ShopProvider>
             </HeaderProvider>

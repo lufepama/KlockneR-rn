@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
 import GeneralNavigator from './components/Shared/GeneralNavigator';
 import { AuthProvider } from './context/AuthContext';
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 export default function App() {
 
   return (
     <AuthProvider>
-      <GeneralNavigator />
+      <StripeProvider>
+        <GeneralNavigator />
+      </StripeProvider>
     </AuthProvider>
   );
 }

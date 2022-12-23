@@ -36,6 +36,21 @@ export const useShop = () => {
         }
     }
 
+    const isCartEmpty = () => {
+        if (cart.length == 0) return true
+        return false
+    }
+
+    const getTotalItemsInCart = () => {
+        let totalItems = 0;
+        if (!isCartEmpty()) {
+            cart.map((item) => {
+                totalItems += item.number
+            })
+        }
+        return totalItems
+    }
+
     return {
         products,
         shopTitle,
@@ -44,5 +59,7 @@ export const useShop = () => {
         addItemCart,
         isItemInCart,
         updateShopTitle,
+        isCartEmpty,
+        getTotalItemsInCart
     }
 }

@@ -14,29 +14,32 @@ const CartItem = ({item}) => {
                 source={{uri: item.detail.data.image}}
             />
             <View style={styles.bodyContainer}>
-            <Text style={styles.title}>{item.detail.data.title}</Text>
-            <Text style={styles.subTitle}>{item.detail.data.description}</Text>
-            <View style={styles.price}> 
-                
+                <Text style={styles.title}>{item.detail.data.title}</Text>
+                <Text style={styles.subTitle}>{item.detail.data.description}</Text>
+                <View style={styles.bottomContainer}>
+                    <View style={styles.cartBtnsContainer}>
+                        <TouchableOpacity>
+                            <Icon
+                            name='minus'
+                            size={25}
+                            />
+                        </TouchableOpacity>
+                        <Text style={styles.numberItemText}>{numberItem}</Text>
+                        <TouchableOpacity>
+                            <Icon
+                                name='plus'
+                                size={25}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.priceText}>
+                            {item.detail.data.price} EUR
+                        </Text>
+                    </View>
+                </View>
             </View>
-        </View>
-        </View>
-        <View style={styles.cartBtnsContainer}>
-                <TouchableOpacity>
-                    <Icon
-                       name='minus'
-                       size={25}
-                    />
-                </TouchableOpacity>
-                <Text style={styles.priceText}>{numberItem}</Text>
-                <TouchableOpacity>
-                    <Icon
-                        name='plus'
-                        size={25}
-                    />
-                </TouchableOpacity>
-        </View>
-        
+        </View>        
     </View>
   )
 }
@@ -45,7 +48,7 @@ export default CartItem
 
 const styles = StyleSheet.create({
     mainContainer: {
-        height: 140,
+        height: 100,
         width:'100%',
         marginTop:10,
         backgroundColor:'white',
@@ -66,18 +69,30 @@ const styles = StyleSheet.create({
     },
     cartBtnsContainer: {
         display:'flex',
+        width:'40%',
         flexDirection:'row',
         justifyContent:'space-between',
         borderWidth:1,
         borderColor:'gray',
         marginTop:10,
     },
+    priceContainer:{
+    },
     priceText: {
-        fontSize:22,
-        marginTop:-5
+        fontSize:15,
+        marginTop:10,
+        color:'gray'
+    },
+    numberItemText:{
+        fontSize:15
     },
     title: {
         fontSize:16,
         fontWeight:'bold'
+    },
+    bottomContainer: {
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-between'
     }
 })

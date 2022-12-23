@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, FlatList} from 'react-native'
+import { StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native'
 import React from 'react'
 import { useShop } from '../../hooks/useShop'
 import CartItem from './CartItem'
@@ -9,7 +9,7 @@ const CartItemList = () => {
     
 
     return (
-        <View style={styles.container}>
+            <View style={styles.container}>
             <FlatList
                 data={cart}
                 numColumns={1}
@@ -18,7 +18,7 @@ const CartItemList = () => {
                     <CartItem key={item.detail.docId} item={item} />
                 }
             />
-        </View>
+            </View>
   )
 }
 

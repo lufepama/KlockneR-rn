@@ -1,35 +1,12 @@
-import { StyleSheet, Text,Image, View, TouchableOpacity, FlatList, Alert } from 'react-native'
+import { StyleSheet, Text,Image, View, TouchableOpacity, FlatList,  } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import HeaderItem from '../Header/HeaderItem'
 import { useHeader } from '../../hooks/useHeader'
-import { useAuth } from '../../hooks/useAuth'
 
 const Header = () => {
 
   const { headerOptions } = useHeader()
-  const { onLogout } = useAuth()
-  
-  const handleLogout = async () => {
-    await onLogout()
-  }
-
-  const createLogoutAlert = () => {
-    Alert.alert(
-      'Cerrar sesion',
-      'Estas seguro que quieres cerrar sesion?',
-      [
-        {
-          text:'Si',
-          onPress: async () => handleLogout()
-        },
-        {
-          text:'Cancelar',
-          style:'cancel'
-        }
-      ]
-    )
-  }
 
   return (
     <View style={styles.root}>

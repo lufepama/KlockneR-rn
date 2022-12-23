@@ -1,10 +1,29 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Alert } from 'react-native'
 import React from 'react'
 import { useAuth } from '../../hooks/useAuth'
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 
 const TopHeader = () => {
 
-  const { isUserLogged } = useAuth()
+  const { isUserLogged, onLogout} = useAuth()
+
+  const createLogoutAlert = () => {
+    Alert.alert(
+      'Cerrar sesion',
+      'Estas seguro que quieres cerrar sesion?',
+      [
+        {
+          text:'Si',
+          onPress: async () => onLogout()
+        },
+        {
+          text:'Cancelar',
+          style:'cancel'
+        }
+      ]
+    )
+  }
 
 
   return (
